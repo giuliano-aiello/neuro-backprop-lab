@@ -1,0 +1,7 @@
+.idea/
+*.iml
+.venv/
+vcs.xml
+modules.xml
+profiles_settings.xml
+Project_Default.xml
