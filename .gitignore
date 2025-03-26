@@ -1,5 +1,5 @@
 data/
-test/trained_model.pt
+tester/trained_model.pt
 .idea/
 *.iml
 .venv/

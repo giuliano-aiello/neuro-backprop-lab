@@ -3,6 +3,6 @@ import torch
 
 
 def save_model(model):
-    if not os.path.exists('./test'):
-        os.makedirs('./test')
-    torch.save(model, './test/trained_model.pt')
+    if not os.path.exists('./tester'):
+        os.makedirs('./tester')
+    torch.save(model, './tester/trained_model.pt')
