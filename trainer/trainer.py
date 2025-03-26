@@ -1,3 +1,6 @@
+import sys
+import logging
+
 import torch
 
 
@@ -5,6 +8,10 @@ class Trainer:
 
     @staticmethod
     def train_eval(model, loader_train_set, loader_eval_set, criterion, optimizer, epochs):
+        logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+        logger = logging.getLogger(__name__)
+        logger.info("Training started...")
+
         train_loss_averages = []
         train_accuracies = []
 
