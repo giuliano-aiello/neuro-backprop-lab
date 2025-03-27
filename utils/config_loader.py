@@ -3,6 +3,7 @@ import logging
 import sys
 import torch.optim as optim
 import torch.nn as nn
+from trainer.rpropplus.rpropplus import RpropPlus
 
 
 def load_config_training(model):
@@ -16,6 +17,8 @@ def load_config_training(model):
 
     if optimizer == 'rprop':
         optimizer = optim.Rprop(model.parameters(), lr=learning_rate)
+    elif optimizer == 'rpropplus':
+        optimizer = RpropPlus(model.parameters(), lr=learning_rate)
     else:
         raise ValueError("Optimizer not supported.")
 
