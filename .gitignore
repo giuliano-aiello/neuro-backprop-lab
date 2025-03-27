@@ -1,4 +1,5 @@
 data/
+config/
 tester/trained_model.pt
 .idea/
 *.iml
