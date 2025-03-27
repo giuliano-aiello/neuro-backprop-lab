@@ -7,7 +7,7 @@ import torch
 class Trainer:
 
     @staticmethod
-    def train_eval(model, loader_train_set, loader_eval_set, criterion, optimizer, epochs):
+    def train_eval(model, criterion, optimizer, loader_train_set, loader_eval_set, epochs):
         logging.basicConfig(level=logging.INFO, stream=sys.stdout)
         logger = logging.getLogger(__name__)
         logger.info("Training started...")
@@ -23,34 +23,34 @@ class Trainer:
                 Trainer.train(model, criterion, optimizer, loader_train_set, train_loss_averages, train_accuracies)
 
             eval_loss_average, eval_accuracy = \
-                Trainer.eval(criterion, eval_accuracies, eval_loss_averages, loader_eval_set, model)
+                Trainer.eval(model, criterion, loader_eval_set, eval_loss_averages, eval_accuracies)
 
             Trainer.print_metrics(epochs, epoch, train_accuracy, train_loss_average, eval_accuracy, eval_loss_average)
 
         return train_loss_averages, train_accuracies, eval_loss_averages, eval_accuracies
 
     @staticmethod
-    def train(model, criterion, optimizer, loader_train_set, train_loss_averges, train_accuracies):
+    def train(model, criterion, optimizer, loader_set, loss_averages, accuracies):
         model.train()
 
         total_correct = 0
         total_loss = 0
         total_samples = 0
 
-        for batch in loader_train_set:
+        for batch in loader_set:
             labels, loss, outputs = \
-                Trainer.train_step(model, batch, criterion, optimizer)
+                Trainer.train_step(model, criterion, optimizer, batch)
 
             total_correct, total_loss, total_samples = \
                 Trainer.gather_metrics(labels, loss, outputs, total_correct, total_loss, total_samples)
 
         train_loss_average, train_accuracy = \
-            Trainer.compute_metrics(total_correct, total_loss, total_samples, train_loss_averges, train_accuracies)
+            Trainer.compute_metrics(total_correct, total_loss, total_samples, loss_averages, accuracies)
 
         return train_loss_average, train_accuracy
 
     @staticmethod
-    def train_step(model, batch, criterion, optimizer):
+    def train_step(model, criterion, optimizer, batch):
         inputs, labels = batch
 
         optimizer.zero_grad()
@@ -62,7 +62,7 @@ class Trainer:
         return labels, loss, outputs
 
     @staticmethod
-    def eval(criterion, accuracies, loss_averages, loader_eval_set, model):
+    def eval(model, criterion, loader_set, loss_averages, accuracies):
         model.eval()
 
         total_loss = 0
@@ -70,9 +70,9 @@ class Trainer:
         total_samples = 0
 
         with torch.no_grad():
-            for batch in loader_eval_set:
+            for batch in loader_set:
                 labels, loss, outputs = \
-                    Trainer.eval_step(batch, criterion, model)
+                    Trainer.eval_step(model, criterion, batch)
 
                 total_correct, total_loss, total_samples = \
                     Trainer.gather_metrics(labels, loss, outputs, total_correct, total_loss, total_samples)
@@ -83,7 +83,7 @@ class Trainer:
         return loss_average, accuracy
 
     @staticmethod
-    def eval_step(batch, criterion, model):
+    def eval_step(model, criterion, batch):
         inputs, labels = batch
 
         outputs = model(inputs)
