@@ -5,8 +5,8 @@ import torch.optim as optim
 import torch.nn as nn
 
 
-def load_config_model(model):
-    with open("config/config.json", "r") as f:
+def load_config_training(model):
+    with open("config/train/config.json", "r") as f:
         config = json.load(f)
 
     criterion     = config.get('criterion', 'cross_entropy')
@@ -29,3 +29,20 @@ def load_config_model(model):
     logger.info(f"Hyperparameters set.\tcriterion = {type(criterion).__name__}, optimizer = {type(optimizer).__name__}, learning rate = {learning_rate}, epochs = {epochs}")
 
     return criterion, optimizer, epochs
+
+def load_config_testing():
+    with open("config/test/config.json", "r") as f:
+        config = json.load(f)
+
+    criterion = config.get('criterion', 'cross_entropy')
+
+    if criterion == 'cross_entropy':
+        criterion = nn.CrossEntropyLoss()
+    else:
+        raise ValueError("Criterion not supported.")
+
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    logger = logging.getLogger(__name__)
+    logger.info(f"criterion = {type(criterion).__name__}")
+
+    return criterion
