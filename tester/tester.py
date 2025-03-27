@@ -60,5 +60,5 @@ class Tester:
         return loss_average, accuracy
 
     @staticmethod
-    def print_metrics(test_accuracy, test_loss_average):
+    def print_metrics(test_loss_average, test_accuracy):
         print(f"Test Loss Average: {test_loss_average:.4f}, Test Accuracy: {test_accuracy:.4f}")
