@@ -13,7 +13,7 @@ loader_train_set = LoaderDataset.get_mnist_loader_dataset(True, 2000, 10000)
 loader_eval_set  = LoaderDataset.get_mnist_loader_dataset(False, 500, 2500)
 
 training_losses, training_accuracies, evaluation_losses, evaluation_accuracies = \
-    Trainer.train_eval(model, loader_train_set, loader_eval_set, criterion, optimizer, epochs)
+    Trainer.train_eval(model, criterion, optimizer, loader_train_set, loader_eval_set, epochs)
 
 plot_metrics(training_losses, training_accuracies, evaluation_losses, evaluation_accuracies)
 
