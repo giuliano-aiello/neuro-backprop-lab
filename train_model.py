@@ -1,4 +1,4 @@
-from utils.config_loader import load_config_model
+from utils.config_loader import load_config_training
 from utils.plot_metrics import plot_metrics
 from utils.save_model import save_model
 from loader_dataset.loader_dataset import LoaderDataset
@@ -7,7 +7,7 @@ from trainer.trainer import Trainer
 
 
 model = ModelMNIST()
-criterion, optimizer, epochs = load_config_model(model)
+criterion, optimizer, epochs = load_config_training(model)
 
 loader_train_set = LoaderDataset.get_mnist_loader_dataset(True, 2000, 10000)
 loader_eval_set  = LoaderDataset.get_mnist_loader_dataset(False, 500, 2500)
