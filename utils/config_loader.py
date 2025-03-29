@@ -44,7 +44,7 @@ def load_config_training(model):
     logger.info(f"Hyperparameters set.\tcriterion = {type(criterion).__name__}, optimizer = {type(optimizer).__name__}, learning rate = {learning_rate}, epochs = {epochs}, train set size = {train_set_size}, train batch size = {train_batch_size}, eval set size = {eval_set_size}, eval batch size = {eval_batch_size}")
     return criterion, optimizer, epochs, loader_train_set, loader_eval_set
 
-def load_config_testing():
+def load_config_testing(optimizer):
     with open("config/test/config.json", "r") as f:
         config = json.load(f)
 
@@ -61,6 +61,6 @@ def load_config_testing():
 
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     logger = logging.getLogger(__name__)
-    logger.info(f"criterion = {type(criterion).__name__}, test set size = {test_set_size}, test batch size = {test_batch_size}")
+    logger.info(f"criterion = {type(criterion).__name__}, optimizer = {optimizer}, test set size = {test_set_size}, test batch size = {test_batch_size}")
 
     return criterion, loader_test_set

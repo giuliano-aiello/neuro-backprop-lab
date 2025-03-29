@@ -16,4 +16,4 @@ training_losses, training_accuracies, evaluation_losses, evaluation_accuracies =
 
 plot_metrics(training_losses, training_accuracies, evaluation_losses, evaluation_accuracies)
 
-save_model(model)
+save_model(model, type(optimizer).__name__)

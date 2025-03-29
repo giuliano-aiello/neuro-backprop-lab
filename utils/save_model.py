@@ -2,7 +2,13 @@ import os
 import torch
 
 
-def save_model(model):
+def save_model(model, optimizer):
     if not os.path.exists('./tester'):
         os.makedirs('./tester')
-    torch.save(model, './tester/trained_model.pt')
+
+    model_data = {
+        'model': model,
+        'optimizer': optimizer
+    }
+
+    torch.save(model_data, './tester/trained_model.pt')
