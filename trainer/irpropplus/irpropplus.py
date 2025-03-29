@@ -48,6 +48,7 @@ class IRpropPlus(Optimizer):
                 update = torch.zeros_like(parameter.data)
                 update[grad_sign >= 0] = -torch.sign(grad[grad_sign >= 0]) * step_size[grad_sign >= 0]
                 update[grad_sign < 0] = -prev_update[grad_sign < 0]
+                grad[grad_sign < 0] = 0
 
                 parameter.data += update
 
