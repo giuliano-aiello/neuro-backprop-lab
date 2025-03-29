@@ -49,14 +49,18 @@ def load_config_testing():
         config = json.load(f)
 
     criterion = config.get('criterion', 'cross_entropy')
+    test_set_size       = config.get('test_set_size', 10000)
+    test_batch_size     = config.get('test_batch_size', 1000)
 
     if criterion == 'cross_entropy':
         criterion = nn.CrossEntropyLoss()
     else:
         raise ValueError("Criterion not supported.")
 
+    loader_test_set = LoaderDataset.get_mnist_loader_dataset(False, test_batch_size, test_set_size)
+
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     logger = logging.getLogger(__name__)
-    logger.info(f"criterion = {type(criterion).__name__}")
+    logger.info(f"criterion = {type(criterion).__name__}, test set size = {test_set_size}, test batch size = {test_batch_size}")
 
-    return criterion
+    return criterion, loader_test_set
