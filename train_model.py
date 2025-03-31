@@ -1,7 +1,6 @@
 from utils.config_loader import load_config_training
 from utils.plot_metrics import plot_metrics
 from utils.save_model import save_model
-from loader_dataset.loader_dataset import LoaderDataset
 from model.model_mnist import ModelMNIST
 from trainer.trainer import Trainer
 
