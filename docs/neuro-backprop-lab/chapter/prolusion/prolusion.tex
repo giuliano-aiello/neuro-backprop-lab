@@ -1,0 +1,46 @@
+\begin{chapter}{Prolusion}
+    \begin{section}{Goal}
+        \par This report provides a comprehensive overview of a Python project whose goal is to develop and compare different adaptive backpropagation techniques involved in a machine learning process, as~\glsxtrfull{rprop}.
+		\par The project follows the ``Empirical evaluation of the improved Rprop learning algorithms'' article by Christian Igel and Michel Hüsken (2001).
+    \end{section}
+    \newpage
+	\begin{section}{Software Stack}
+		\begin{itemize}
+			\item Python 3.9.6
+			\item PyTorch 2.6.0
+		\end{itemize}
+		The project is equipped with a \texttt{requirements.txt} file which allows for seamless installation of dependencies, by executing \texttt{pip install -r requirements.txt}.
+	\end{section}
+	\newpage
+	\begin{section}{Project Structure}
+		\dirtree{%
+			.1 neuro-backprop-lab/.
+			.2 model/.
+			.2 tester/.
+			.3 tester.py.
+			.3 trained\_model.pt.
+			.2 trainer/.
+			.3 irpropplus/.
+			.3 rpropplus/.
+			.3 trainer.py.
+			.2 utils/.
+			.2 test\_model.py.
+			.2 train\_model.py.
+		}
+		\medskip
+		\begin{itemize}
+			\item \texttt{model} includes the neural network model architecture.
+			\item \texttt{tester} handles the testing flow of the ready-to-use \texttt{trained\_model.pt}.
+			\item \texttt{trainer} handles the examined backpropagation techniques and the training flow of the model, saving it as \texttt{trained\_model.pt}.
+			\item \texttt{utils} offers utility functions designed to support the root project scripts.
+		\end{itemize}
+	\end{section}
+		\begin{comment}
+			\begin{figure}[ht]
+				\centering
+				\includesvg[inkscapelatex=true]{drawing.svg}
+				\caption{\emph{True inkscapelatex option}}
+				\label{fig:latexembedded}
+			\end{figure}
+		\end{comment}
+\end{chapter}
