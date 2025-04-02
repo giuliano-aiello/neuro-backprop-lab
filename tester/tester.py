@@ -19,7 +19,9 @@ class Tester:
 
         with torch.no_grad():
             for batch in loader_set:
-                labels, loss, outputs = Tester.eval_step(model, criterion, batch)
+                labels, loss, outputs = \
+                    Tester.eval_step(model, criterion, batch)
+
                 total_correct, total_loss, total_samples = \
                     Tester.gather_metrics(labels, loss, outputs, total_correct, total_loss, total_samples)
 
