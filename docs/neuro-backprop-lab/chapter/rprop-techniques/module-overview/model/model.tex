@@ -1,8 +1,8 @@
 \begin{subsection}{Model}
     \par This class represents the artificial neural network model architecture to be trained and tested.
-    \par It is a shallow network based on \texttt{torch.nn.Module}\footnote{https://pytorch.org/docs/stable/generated/torch.nn.Module.html, 2025} class. Its layers are fully connected using \texttt{torch.nn.Linear(.)} and they feed forward as follows:
+    \par It is a shallow network based on \texttt{torch.nn.Module}\footnote{https://pytorch.org/docs/stable/generated/torch.nn.Module.html, 2025} class. Its three layers are fully connected using \texttt{torch.nn.Linear(.)} and they feed forward as follows:
     \begin{enumerate}
-        \item the first layer flattens the input~\glsxtrshort{mnist} image, by transforming it from a multidimensional vector to a $784$-sized (since a $28 \times 28$ sized image is manipulated) one-dimensional vector;
+        \item the first layer flattens the input~\glsxtrshort{mnist} image, by transforming it from a multidimensional vector to a $784$-sized (since a $28 \times 28$-sized image is manipulated) one-dimensional vector;
         \item the hidden layer receives the transformed vector and processes it into a $128$-sized vector with a \glsxtrshort{relu} activation function to introduce non-linearity, a choice that was the result of empirical experiments;
         \item the output layer extracts the final predictions by transforming the $128$-sized vector into a $10$-sized vector, which corresponds to the number of possible classes for classification.
     \end{enumerate}
