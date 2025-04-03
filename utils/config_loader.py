@@ -6,6 +6,7 @@ import torch.nn as nn
 
 from utils.loader_dataset.loader_dataset import LoaderDataset
 from trainer.irpropplus.irpropplus import IRpropPlus
+from trainer.rpropminus.rpropminus import RpropMinus
 from trainer.rpropplus.rpropplus import RpropPlus
 
 
@@ -14,7 +15,7 @@ def load_config_training(model):
         config = json.load(f)
 
     criterion            = config.get('criterion', 'cross_entropy')
-    optimizer            = config.get('optimizer', 'rprop')
+    optimizer            = config.get('optimizer', 'rproppytorch')
     learning_rate        = config.get('learning_rate', 0.001)
     epochs               = config.get('epochs', 20)
     train_set_size       = config.get('train_set_size', 10000)
@@ -22,12 +23,14 @@ def load_config_training(model):
     eval_set_size        = config.get('eval_set_size', 2500)
     eval_batch_size      = config.get('eval_batch_size', 500)
 
-    if optimizer == 'rprop':
+    if optimizer == 'rproppluspytorch':
         optimizer = optim.Rprop(model.parameters(), lr=learning_rate)
-    elif optimizer == 'rpropplus':
-        optimizer = RpropPlus(model.parameters(), lr=learning_rate)
     elif optimizer == 'irpropplus':
         optimizer = IRpropPlus(model.parameters(), lr=learning_rate)
+    elif optimizer == 'rpropminus':
+        optimizer = RpropMinus(model.parameters(), lr=learning_rate)
+    elif optimizer == 'rpropplus':
+        optimizer = RpropPlus(model.parameters(), lr=learning_rate)
     else:
         raise ValueError("Optimizer not supported.")
 
@@ -41,7 +44,10 @@ def load_config_training(model):
 
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     logger = logging.getLogger(__name__)
-    logger.info(f"Hyperparameters set.\tcriterion = {type(criterion).__name__}, optimizer = {type(optimizer).__name__}, learning rate = {learning_rate}, epochs = {epochs}, train set size = {train_set_size}, train batch size = {train_batch_size}, eval set size = {eval_set_size}, eval batch size = {eval_batch_size}")
+    optimizer_name = optimizer.__class__.__name__
+    if optimizer_name == 'Rprop': optimizer_name = 'RpropPlusPyTorch'
+    logger.info(f"Hyperparameters set.\tcriterion = {type(criterion).__name__}, optimizer = {optimizer_name}, learning rate = {learning_rate}, epochs = {epochs}, train set size = {train_set_size}, train batch size = {train_batch_size}, eval set size = {eval_set_size}, eval batch size = {eval_batch_size}")
+
     return criterion, optimizer, epochs, loader_train_set, loader_eval_set
 
 def load_config_testing(optimizer):
