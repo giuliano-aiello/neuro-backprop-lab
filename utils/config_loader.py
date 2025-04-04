@@ -10,6 +10,9 @@ from trainer.rpropminus.rpropminus import RpropMinus
 from trainer.rpropplus.rpropplus import RpropPlus
 
 
+logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+logger = logging.getLogger(__name__)
+
 def load_config_training(model):
     with open("config/train/config.json", "r") as f:
         config = json.load(f)
@@ -46,8 +49,6 @@ def load_config_training(model):
     loader_train_set, loader_eval_set = \
         MNISTLoaderDataset.get_loader_dataset_train_eval(train_set_size, train_batch_size, eval_set_size, eval_batch_size)
 
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    logger = logging.getLogger(__name__)
     logger.info(f"Hyperparameters set.\tcriterion = {type(criterion).__name__}, optimizer = {get_optimizer_name(optimizer.__class__.__name__)}, learning rate = {learning_rate}, epochs = {epochs}, train set size = {train_set_size}, train batch size = {train_batch_size}, eval set size = {eval_set_size}, eval batch size = {eval_batch_size}")
 
     return criterion, optimizer, epochs, loader_train_set, loader_eval_set
@@ -68,11 +69,28 @@ def load_config_testing(optimizer):
 
     loader_test_set = MNISTLoaderDataset.get_loader_dataset_test(test_batch_size)
 
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    logger = logging.getLogger(__name__)
-    logger.info(f"criterion = {type(criterion).__name__}, optimizer = {get_optimizer_name(optimizer)}, test set size = {test_set_size}, test batch size = {test_batch_size}")
+    log_model_info(criterion, optimizer, test_batch_size, test_set_size)
 
     return criterion, loader_test_set
+
+
+def log_model_info(criterion, optimizer, test_batch_size, test_set_size):
+    for param_group in optimizer.param_groups:
+        lr = param_group.get('lr')
+
+        etas = param_group.get('etas')
+        etastring = etas
+        if etastring is None:
+            etaminus = param_group.get('etaminus')
+            etaplus = param_group.get('etaplus')
+            etastring = f"({etaminus}, {etaplus})"
+
+    logger.info(f"criterion = {type(criterion).__name__}, "
+                f"optimizer = {get_optimizer_name(optimizer.__class__.__name__)}, "
+                f"learning rate = {lr}, "
+                f"etas = {etastring}, "
+                f" test set size = {test_set_size}, test batch size = {test_batch_size}")
+
 
 def get_optimizer_name(optimizer_name):
     if optimizer_name == 'Rprop':

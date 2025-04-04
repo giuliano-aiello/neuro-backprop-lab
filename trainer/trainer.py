@@ -3,14 +3,16 @@ import logging
 
 import torch
 
+from utils.save_model import save_model
+
 
 class Trainer:
+    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    logger = logging.getLogger(__name__)
 
     @staticmethod
     def train_eval(model, criterion, optimizer, loader_train_set, loader_eval_set, epochs):
-        logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-        logger = logging.getLogger(__name__)
-        logger.info("Training started...")
+        Trainer.logger.info("Training started...")
 
         train_loss_averages = []
         train_accuracies = []
@@ -18,6 +20,7 @@ class Trainer:
         eval_loss_averages = []
         eval_accuracies = []
 
+        best_eval_loss = float('inf')
         for epoch in range(epochs):
             train_loss_average, train_accuracy = \
                 Trainer.train(model, criterion, optimizer, loader_train_set, train_loss_averages, train_accuracies)
@@ -25,9 +28,20 @@ class Trainer:
             eval_loss_average, eval_accuracy = \
                 Trainer.eval(model, criterion, loader_eval_set, eval_loss_averages, eval_accuracies)
 
+            best_eval_loss = Trainer.save_best_model(model, optimizer, epoch, eval_loss_average, best_eval_loss)
+
             Trainer.print_metrics(epochs, epoch, train_accuracy, train_loss_average, eval_accuracy, eval_loss_average)
 
         return train_loss_averages, train_accuracies, eval_loss_averages, eval_accuracies
+
+    @staticmethod
+    def save_best_model(model, optimizer, epoch, eval_loss_average, best_eval_loss):
+        if eval_loss_average < best_eval_loss:
+            best_eval_loss = eval_loss_average
+            save_model(model, optimizer, epoch, best_eval_loss)
+            Trainer.logger.info(f"Model saved at epoch {epoch} | Best eval Loss: {best_eval_loss:.8f}")
+
+        return best_eval_loss
 
     @staticmethod
     def train(model, criterion, optimizer, loader_set, loss_averages, accuracies):
@@ -101,9 +115,9 @@ class Trainer:
         return total_correct, total_loss, total_samples
 
     @staticmethod
-    def compute_metrics(total_correct, total_loss, total_samples, loss_avgerages, accuracies):
+    def compute_metrics(total_correct, total_loss, total_samples, loss_averages, accuracies):
         loss_average = total_loss / total_samples
-        loss_avgerages.append(loss_average)
+        loss_averages.append(loss_average)
 
         accuracy = total_correct / total_samples
         accuracies.append(accuracy)
@@ -112,8 +126,8 @@ class Trainer:
 
     @staticmethod
     def print_metrics(epochs, epoch, train_accuracy, train_loss_average, eval_accuracy, eval_loss_average):
-        print(
-            f"Epoch {epoch + 1}/{epochs}"
+        Trainer.logger.info(
+            f"Epoch {epoch}/{epochs}"
             f" | Training Loss Average: {train_loss_average:.4f}, Training Accuracy: {train_accuracy:.4f}"
             f" | Evaluation Loss Average: {eval_loss_average:.4f}, Evaluation Accuracy: {eval_accuracy:.4f}"
         )
