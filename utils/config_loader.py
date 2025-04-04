@@ -49,7 +49,7 @@ def load_config_training(model):
     loader_train_set, loader_eval_set = \
         MNISTLoaderDataset.get_loader_dataset_train_eval(train_set_size, train_batch_size, eval_set_size, eval_batch_size)
 
-    logger.info(f"Hyperparameters set.\tcriterion = {type(criterion).__name__}, optimizer = {get_optimizer_name(optimizer.__class__.__name__)}, learning rate = {learning_rate}, epochs = {epochs}, train set size = {train_set_size}, train batch size = {train_batch_size}, eval set size = {eval_set_size}, eval batch size = {eval_batch_size}")
+    log_model_info(criterion, optimizer, train_set_size=train_set_size, train_batch_size=train_batch_size, eval_set_size=eval_set_size, eval_batch_size=eval_batch_size)
 
     return criterion, optimizer, epochs, loader_train_set, loader_eval_set
 
@@ -69,12 +69,12 @@ def load_config_testing(optimizer):
 
     loader_test_set = MNISTLoaderDataset.get_loader_dataset_test(test_batch_size)
 
-    log_model_info(criterion, optimizer, test_batch_size, test_set_size)
+    log_model_info(criterion, optimizer, test_set_size=test_set_size, test_batch_size=test_batch_size)
 
     return criterion, loader_test_set
 
 
-def log_model_info(criterion, optimizer, test_batch_size, test_set_size):
+def log_model_info(criterion, optimizer, train_set_size=None, train_batch_size=None, eval_set_size=None, eval_batch_size=None, test_set_size=None, test_batch_size=None):
     for param_group in optimizer.param_groups:
         lr = param_group.get('lr')
 
@@ -88,8 +88,13 @@ def log_model_info(criterion, optimizer, test_batch_size, test_set_size):
     logger.info(f"criterion = {type(criterion).__name__}, "
                 f"optimizer = {get_optimizer_name(optimizer.__class__.__name__)}, "
                 f"learning rate = {lr}, "
-                f"etas = {etastring}, "
-                f" test set size = {test_set_size}, test batch size = {test_batch_size}")
+                f"etas = {etastring}")
+
+    if train_set_size is not None:
+        logger.info(f"train_set_size = {train_set_size}, train_batch_size = {train_batch_size}")
+        logger.info(f"eval_set_size = {eval_set_size}, eval_batch_size = {eval_batch_size}")
+    if test_set_size is not None:
+        logger.info(f"test_set_size = {test_set_size}, test_batch_size = {test_batch_size}")
 
 
 def get_optimizer_name(optimizer_name):
