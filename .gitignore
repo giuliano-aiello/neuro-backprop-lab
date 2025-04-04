@@ -1,6 +1,6 @@
 data/
 config/
-tester/trained_model.pt
+tester/*.pt
 .idea/
 *.iml
 .venv/

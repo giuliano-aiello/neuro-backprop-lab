@@ -14,5 +14,3 @@ training_losses, training_accuracies, evaluation_losses, evaluation_accuracies =
     Trainer.train_eval(model, criterion, optimizer, loader_train_set, loader_eval_set, epochs)
 
 plot_metrics(training_losses, training_accuracies, evaluation_losses, evaluation_accuracies)
-
-save_model(model, type(optimizer).__name__)
