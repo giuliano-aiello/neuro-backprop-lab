@@ -2,9 +2,9 @@
   "criterion": "cross_entropy",
   "optimizer": "rpropminus",
   "learning_rate": 0.001,
-  "epochs": 20,
-  "train_set_size": 20000,
-  "train_batch_size": 2500,
-  "eval_set_size": 5000,
-  "eval_batch_size": 1000
+  "epochs": 50,
+  "train_set_size": 50000,
+  "train_batch_size": 1000,
+  "eval_set_size": 10000,
+  "eval_batch_size": 250
 }

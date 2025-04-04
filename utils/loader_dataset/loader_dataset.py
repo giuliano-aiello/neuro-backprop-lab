@@ -1,34 +1,39 @@
 import torch
 import torchvision
-import torchvision.transforms as transforms
+from torch.utils.data import random_split, DataLoader
+from torchvision import datasets, transforms
 
 
-class LoaderDataset(torch.utils.data.Dataset):
-
-    @staticmethod
-    def get_mnist_loader_dataset(train_mode=True, batch_size=256, subset_size=None):
-        dataset = LoaderDataset.__get_dataset(train_mode, subset_size)
-
-        loader_dataset = LoaderDataset.__get_loader_dataset(dataset, train_mode, batch_size)
-
-        return loader_dataset
+class MNISTLoaderDataset(torch.utils.data.Dataset):
 
     @staticmethod
-    def __get_loader_dataset(dataset, train_mode, batch_size):
-        shuffle = train_mode
+    def get_loader_dataset_test(batch_size=256):
+        dataset_test = MNISTLoaderDataset.__get_dataset(train_mode=False)
 
+        loader_dataset_test = MNISTLoaderDataset.__get_loader_dataset(dataset_test, batch_size=batch_size, shuffle=False)
+
+        return loader_dataset_test
+
+    @staticmethod
+    def get_loader_dataset_train_eval(dataset_size_train=10000, batch_size_train=2000, dataset_size_eval=2500, batch_size_eval=500):
+        training_set = MNISTLoaderDataset.__get_dataset()
+
+        dataset_train, dataset_eval = random_split(training_set, [dataset_size_train, dataset_size_eval])
+
+        loader_dataset_train = MNISTLoaderDataset.__get_loader_dataset(dataset_train, batch_size=batch_size_train, shuffle=True)
+        loader_dataset_eval = MNISTLoaderDataset.__get_loader_dataset(dataset_eval, batch_size=batch_size_eval, shuffle=False)
+
+        return loader_dataset_train, loader_dataset_eval
+
+    @staticmethod
+    def __get_loader_dataset(dataset, batch_size=256, shuffle=True):
         loader_dataset = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
 
         return loader_dataset
 
     @staticmethod
-    def __get_dataset(train_mode, subset_size: None):
-        transform = LoaderDataset.__get_transform()
-
-        dataset = torchvision.datasets.MNIST(root='./data', train=train_mode, download=True, transform=transform)
-
-        if subset_size is not None:
-            dataset = torch.utils.data.Subset(dataset, range(subset_size))
+    def __get_dataset(train_mode=True):
+        dataset = torchvision.datasets.MNIST(root='./data', train=train_mode, download=True, transform=MNISTLoaderDataset.__get_transform())
 
         return dataset
 
