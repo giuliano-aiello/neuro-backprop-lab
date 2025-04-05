@@ -39,7 +39,7 @@ class Trainer:
         if eval_loss_average < best_eval_loss:
             best_eval_loss = eval_loss_average
             save_model(model, optimizer, epoch, best_eval_loss)
-            Trainer.logger.info(f"Model saved at epoch {epoch} | Best eval Loss: {best_eval_loss:.8f}")
+            Trainer.logger.info(f"Model saved at epoch {epoch + 1} | Best eval Loss: {best_eval_loss:.8f}")
 
         return best_eval_loss
 
@@ -127,7 +127,7 @@ class Trainer:
     @staticmethod
     def print_metrics(epochs, epoch, train_accuracy, train_loss_average, eval_accuracy, eval_loss_average):
         Trainer.logger.info(
-            f"Epoch {epoch}/{epochs}"
+            f"Epoch {epoch + 1}/{epochs}"
             f" | Training Loss Average: {train_loss_average:.4f}, Training Accuracy: {train_accuracy:.4f}"
             f" | Evaluation Loss Average: {eval_loss_average:.4f}, Evaluation Accuracy: {eval_accuracy:.4f}"
         )
