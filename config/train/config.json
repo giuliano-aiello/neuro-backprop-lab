@@ -1,6 +1,6 @@
 {
   "criterion": "cross_entropy",
-  "optimizer": "irpropplus",
+  "optimizer": "rpropminus",
   "learning_rate": 0.001,
   "epochs": 50,
   "train_set_size": 50000,
