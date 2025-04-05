@@ -128,6 +128,6 @@ class Trainer:
     def print_metrics(epochs, epoch, train_accuracy, train_loss_average, eval_accuracy, eval_loss_average):
         Trainer.logger.info(
             f"Epoch {epoch + 1}/{epochs}"
-            f" | Training Loss Average: {train_loss_average:.4f}, Training Accuracy: {train_accuracy:.4f}"
-            f" | Evaluation Loss Average: {eval_loss_average:.4f}, Evaluation Accuracy: {eval_accuracy:.4f}"
+            f" | Training Loss Average: {train_loss_average:.5f}, Training Accuracy: {train_accuracy:.5f}"
+            f" | Evaluation Loss Average: {eval_loss_average:.5f}, Evaluation Accuracy: {eval_accuracy:.5f}"
         )
