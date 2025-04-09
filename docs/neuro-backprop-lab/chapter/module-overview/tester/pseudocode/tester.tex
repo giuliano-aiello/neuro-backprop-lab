@@ -1,2 +1,27 @@
 \begin{algorithm}
+    \footnotesize
+    \SetAlgoLined
+    \SetKwInOut{Input}{Input}
+    \SetKwInOut{Output}{Output}
+
+    \Input{model, criterion, test\_set}
+
+    \BlankLine
+    \BlankLine
+    \BlankLine
+
+    \SetKwFunction{eval}{$eval$}
+    \SetKwProg{Fn}{Function}{:}{\KwRet}
+    \Fn{\eval{$model$, $criterion$, $batch$}}{
+        $inputs$, $labels \gets batch$\\
+        $outputs \gets model(inputs)$\\
+        $loss \gets criterion(outputs, labels)$ \BlankLine
+        \KwRet $labels$, $loss$, $outputs$
+    }
+
+    \ForEach{$batch$ \textbf{in} $test\_set$}{
+        $labels, loss, outputs \gets \eval{model, criterion, batch}$\\
+        $total\_correct, total\_loss, total\_samples \gets gather\_metrics(labels, loss, outputs)$
+    }
+    $loss\_average, accuracy \gets compute\_metrics(total\_correct, total\_loss, total\_samples)$
 \end{algorithm}
