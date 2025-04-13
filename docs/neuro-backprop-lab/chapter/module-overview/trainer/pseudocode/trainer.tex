@@ -1,0 +1,75 @@
+\begin{algorithm}
+    \footnotesize
+    \SetAlgoLined
+    \SetKwInOut{Input}{Input}
+    \SetKwInOut{Output}{Output}
+
+    \BlankLine
+    \BlankLine
+    \BlankLine
+
+    \SetKwFunction{traineval}{$traineval$}
+    \SetKwProg{Fn}{Function}{:}{\KwRet}
+    \Fn{\traineval{$model$, $criterion$, $optimizer$, $train\_set$, $eval\_set$, $epochs$}}{
+        \ForEach{$epoch \in epochs$}{
+            $train\_loss\_avg, train\_accuracy \gets train(model, criterion, optimizer, train\_set, train\_loss\_avgs, train\_accuracies)$\BlankLine
+            $eval\_loss\_avg, eval\_accuracy \gets eval(model, criterion, eval\_set, eval\_loss\_avgs, eval\_accuracies)$
+        }
+        \KwRet $train\_loss\_avgs, train\_accuracies, eval\_loss\_avgs, eval\_accuracies$
+    }
+
+    \BlankLine
+    \BlankLine
+    \BlankLine
+
+    \SetKwFunction{train}{$train$}
+    \SetKwProg{Fn}{Function}{:}{\KwRet}
+    \Fn{\train{$model$, $criterion$, $train\_set$, $loss\_averages$, $accuracies$}}{
+        \ForEach{$batch \in train\_set$}{
+            $labels, loss, outputs \gets trainstep(model, criterion, optimizer, batch)$\\
+            $total\_correct, total\_loss, total\_samples \gets gather\_metrics(labels, loss, outputs, total\_correct, total\_loss, total\_samples)$
+        }
+        $loss\_average, accuracy \gets compute\_metrics(total\_correct, total\_loss, total\_samples, loss\_averages, loss\_accuracies)$\BlankLine
+
+        \KwRet $loss\_average, accuracy$
+    }
+
+    \SetKwFunction{trainstep}{$trainstep$}
+    \SetKwProg{Fn}{Function}{:}{\KwRet}
+    \Fn{\trainstep{$model$, $criterion$, $optimizer$, $batch$}}{
+        $inputs, labels \gets batch$\BlankLine
+
+        $outputs \gets model(inputs)$\\
+        $loss \gets criterion(outputs, labels)$\\
+        $loss.compute\_gradients()$\\
+        $optimizer.step()$\BlankLine
+
+        \KwRet $labels, loss, outputs$
+    }
+
+    \SetKwFunction{eval}{$eval$}
+    \SetKwProg{Fn}{Function}{:}{\KwRet}
+    \Fn{\eval{$model$, $criterion$, $eval\_set$, $loss\_averages$, $accuracies$}}{
+        \ForEach{$batch \in eval\_set$}{
+            $labels, loss, outputs \gets evalstep(model, criterion, batch)$\\
+            $total\_correct, total\_loss, total\_samples \gets gather\_metrics(labels, loss, outputs, total\_correct, total\_loss, total\_samples)$
+        }
+        $loss\_average, accuracy \gets compute\_metrics(total\_correct, total\_loss, total\_samples, loss\_averages, accuracies)$ \BlankLine
+
+        \KwRet $loss\_average$, $accuracy$
+    }
+
+    \SetKwFunction{evalstep}{$evalstep$}
+    \SetKwProg{Fn}{Function}{:}{\KwRet}
+    \Fn{\evalstep{$model$, $criterion$, $batch$}}{
+        $inputs, labels \gets batch$\BlankLine
+
+        $outputs \gets model(inputs)$\\
+        $loss \gets criterion(outputs, labels)$\BlankLine
+
+        \KwRet $labels, loss, outputs$
+    }
+
+    \caption{\texttt{trainer.py}}
+    \label{alg:trainer}
+\end{algorithm}

@@ -1,0 +1,20 @@
+\begin{algorithm}[htp]
+    \footnotesize
+    \SetAlgoLined
+    \SetKwInOut{Input}{Input}
+    \SetKwInOut{Output}{Output}
+
+    \BlankLine
+    \BlankLine
+    \BlankLine
+
+    $model \gets new Model()$\\
+    $criterion, optimizer, epochs, train\_set, eval\_set \gets get\_configuration()$\BlankLine\BlankLine
+
+    $Trainer.traineval(model, criterion, optimizer, train\_set, eval\_set, epochs)$\BlankLine\BlankLine
+
+    $savemodel(model)$
+
+    \caption{\texttt{train\_model.py}}
+    \label{alg:trainmodel}
+\end{algorithm}

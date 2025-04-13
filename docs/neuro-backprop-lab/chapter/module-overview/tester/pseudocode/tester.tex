@@ -1,4 +1,4 @@
-\begin{algorithm}
+\begin{algorithm}[htp]
     \footnotesize
     \SetAlgoLined
     \SetKwInOut{Input}{Input}
@@ -10,6 +10,16 @@
     \BlankLine
     \BlankLine
 
+    \SetKwFunction{test}{$test$}
+    \SetKwProg{Fn}{Function}{:}{\KwRet}
+    \Fn{\test{$model$, $criterion$, $batch$}}{
+        \ForEach{$batch \in test\_set$}{
+            $labels, loss, outputs \gets eval(model, criterion, batch)$\\
+            $total\_correct, total\_loss, total\_samples \gets gather\_metrics(labels, loss, outputs)$
+        }
+        $loss\_average, accuracy \gets compute\_metrics(total\_correct, total\_loss, total\_samples)$
+    }
+
     \SetKwFunction{eval}{$eval$}
     \SetKwProg{Fn}{Function}{:}{\KwRet}
     \Fn{\eval{$model$, $criterion$, $batch$}}{
@@ -19,9 +29,6 @@
         \KwRet $labels$, $loss$, $outputs$
     }
 
-    \ForEach{$batch$ \textbf{in} $test\_set$}{
-        $labels, loss, outputs \gets \eval{model, criterion, batch}$\\
-        $total\_correct, total\_loss, total\_samples \gets gather\_metrics(labels, loss, outputs)$
-    }
-    $loss\_average, accuracy \gets compute\_metrics(total\_correct, total\_loss, total\_samples)$
+    \caption{\texttt{tester.py}}
+    \label{alg:tester}
 \end{algorithm}
