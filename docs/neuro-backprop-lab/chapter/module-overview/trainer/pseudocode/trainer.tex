@@ -24,7 +24,7 @@
 
     \SetKwFunction{train}{$train$}
     \SetKwProg{Fn}{Function}{:}{\KwRet}
-    \Fn{\train{$model$, $criterion$, $train\_set$, $loss\_averages$, $accuracies$}}{
+    \Fn{\train{$model$, $criterion$, $optimizer$, $train\_set$, $loss\_averages$, $accuracies$}}{
         \ForEach{$batch \in train\_set$}{
             $labels, loss, outputs \gets trainstep(model, criterion, optimizer, batch)$\\
             $total\_correct, total\_loss, total\_samples \gets gather\_metrics(labels, loss, outputs, total\_correct, total\_loss, total\_samples)$
