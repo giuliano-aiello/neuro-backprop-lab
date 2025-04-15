@@ -1,4 +1,25 @@
 \begin{section}{Implementations}
+    \par Recall that the main concern of the documentation is readability. Hence, pseudocode and actual code implementations may slightly differ, as the Python scripting language allows for significant performance improvements through the use of native structures. These differences clearly don't affect the functionality of the implementations.
+    \par Each~\glsxtrshort{rprop} algorithm that will be described corresponds to a specialized\\\texttt{torch.optim.Optimizer.step()}\footnote{\textit{https://pytorch.org/docs/main/optim.html} (accessed 2025)} class method.\\
+    \par An~\glsxtrshort{rprop} algorithm is intended to perform the following steps:
+    \begin{enumerate}
+        \item Compute the gradient of the error function with respect to the model weights.
+        \begin{item}
+            Update the step size based on a conditional logic of the current and previous gradient sign:
+            \[
+                \Delta_{ij}^{curr} =
+                \begin{cases}
+                    \min(\eta^{+} \cdot \Delta_{ij}^{prev}, \Delta_{\max}) & \text{if} {\frac{\partial E}{\partial w_{ij}}}^{curr} \cdot {\frac{\partial E}{\partial w_{ij}}}^{prev} > 0 \\[2ex]
+                    \max(\eta^{-} \cdot \Delta_{ij}^{prev}, \Delta_{\min}) & \text{if} {\frac{\partial E}{\partial w_{ij}}}^{curr} \cdot {\frac{\partial E}{\partial w_{ij}}}^{prev} < 0 \\[2ex]
+                    \Delta_{ij}^{prev} & \text{otherwise}
+                \end{cases}
+            \]
+        \end{item}
+        \item Update the step size direction using either weight-backtracking or the gradient sign.
+        \item Update weights with the step size direction.
+    \end{enumerate}
+    Subsequently, each variant of the algorithm implements its own adaptation of this general process.
+    \clearpage
     \input{chapter/rprop-techniques/implementations/rpropminus/rpropminus}
     \input{chapter/rprop-techniques/implementations/rpropplus/rpropplus}
     \input{chapter/rprop-techniques/implementations/irpropplus/irpropplus}

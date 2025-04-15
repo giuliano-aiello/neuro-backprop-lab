@@ -11,7 +11,7 @@
     \SetKwFunction{getdatasettraineval}{$getdatasettraineval$}
     \SetKwProg{Fn}{Function}{:}{\KwRet}
     \Fn{\getdatasettraineval{$dataset\_size\_train$, $batch\_size\_train$, $dataset\_size\_eval$, $batch\_size\_eval$}}{
-        $learning\_set \gets get\_dataset(learn\_mode=True)$\\
+        $learning\_set \gets get\_MNIST\_dataset(learn\_mode=True)$\\
         $dataset\_train, dataset\_eval \gets split(learning\_set, dataset\_size\_train, batch\_size\_train, dataset\_size\_eval, batch\_size\_eval)$\BlankLine
 
         \KwRet $dataset\_train, dataset\_eval$
@@ -24,7 +24,7 @@
     \SetKwFunction{getdatasettest}{$getdatasettest$}
     \SetKwProg{Fn}{Function}{:}{\KwRet}
     \Fn{\getdatasettest{$dataset\_size$, $batch\_size$}}{
-        $dataset\_test \gets get\_dataset(learn\_mode=False)$\BlankLine
+        $dataset\_test \gets get\_MNIST\_dataset(learn\_mode=False)$\BlankLine
 
         \KwRet $dataset\_test(batch\_size)$
     }
