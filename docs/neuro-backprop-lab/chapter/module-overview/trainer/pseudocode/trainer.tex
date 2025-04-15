@@ -13,7 +13,10 @@
     \Fn{\traineval{$model$, $criterion$, $optimizer$, $train\_set$, $eval\_set$, $epochs$}}{
         \ForEach{$epoch \in epochs$}{
             $train\_loss\_avg, train\_accuracy \gets train(model, criterion, optimizer, train\_set, train\_loss\_avgs, train\_accuracies)$\BlankLine
-            $eval\_loss\_avg, eval\_accuracy \gets eval(model, criterion, eval\_set, eval\_loss\_avgs, eval\_accuracies)$
+            $eval\_loss\_avg, eval\_accuracy \gets eval(model, criterion, eval\_set, eval\_loss\_avgs, eval\_accuracies)$\BlankLine
+            \If{$eval\_loss\_avg < eval\_loss\_avg\_prev$}{
+                $savemodel(model)$
+            }
         }
         \KwRet $train\_loss\_avgs, train\_accuracies, eval\_loss\_avgs, eval\_accuracies$
     }

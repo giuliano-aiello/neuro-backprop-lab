@@ -1,0 +1,25 @@
+\begin{algorithm}
+    \BlankLine
+    \BlankLine
+
+    % delta_ij   step size
+    % delta w_ij step size direction
+    \For{$parameter \in parameters$} { \BlankLine
+        \If{${\frac{\partial E}{\partial w_{ij}}}^{curr} \cdot {\frac{\partial E}{\partial w_{ij}}}^{prev} > 0$} { \BlankLine
+            $\Delta_{ij}^{curr} = \min(\eta^{+} \cdot \Delta_{ij}^{prev}, \Delta_{\max})$
+        }
+        \If{${\frac{\partial E}{\partial w_{ij}}}^{curr} \cdot {\frac{\partial E}{\partial w_{ij}}}^{prev} < 0$} { \BlankLine
+            $\Delta_{ij}^{curr} = \max(\eta^{-} \cdot \Delta_{ij}^{prev}, \Delta_{\min})$
+        }
+        \If{${\frac{\partial E}{\partial w_{ij}}}^{curr} \cdot {\frac{\partial E}{\partial w_{ij}}}^{prev} = 0$} { \BlankLine
+            $\Delta_{ij}^{curr} = \Delta_{ij}^{prev}$
+        } \BlankLine
+
+        $\Delta w_{ij}^{curr} = -\operatorname{sign}(\frac{\partial E}{\partial w_{ij}}^{curr}) \cdot \Delta_{ij}^{curr}$ \BlankLine
+
+        $w_{ij}^{curr} = w_{ij}^{prev} + \Delta w_{ij}^{curr}$
+    }
+
+    \caption{\texttt{RpropMinus.step()}}
+    \label{alg:rpropminus}
+\end{algorithm}
