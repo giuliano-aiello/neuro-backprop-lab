@@ -39,15 +39,13 @@ class IRpropPlus(Optimizer):
                 error = grad.abs()
 
                 step_size[stepsize_increase] = torch.min(step_size[stepsize_increase] * eta_plus, torch.tensor(delta_max, device=parameter.device))
-
-                step_size[stepsize_decrease] = torch.where(error[stepsize_decrease] > prev_error[stepsize_decrease],
-                                                       -step_size[stepsize_decrease],
-                                                       torch.zeros_like(step_size[stepsize_decrease]))
                 step_size[stepsize_decrease] = torch.max(step_size[stepsize_decrease] * eta_minus, torch.tensor(delta_min, device=parameter.device))
 
                 update = torch.zeros_like(parameter.data)
                 update[grad_sign >= 0] = -torch.sign(grad[grad_sign >= 0]) * step_size[grad_sign >= 0]
-                update[grad_sign < 0] = -prev_update[grad_sign < 0]
+                update[grad_sign < 0] = torch.where(error[stepsize_decrease] > prev_error[stepsize_decrease],
+                            -prev_update[stepsize_decrease],
+                            torch.zeros_like(prev_update[stepsize_decrease]))
                 grad[grad_sign < 0] = 0
 
                 parameter.data += update
