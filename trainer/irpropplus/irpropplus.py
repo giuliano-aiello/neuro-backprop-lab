@@ -24,7 +24,7 @@ class IRpropPlus(Optimizer):
                 if 'step_size' not in state:
                     state['step_size'] = torch.full_like(parameter.data, group['lr'])
                     state['prev_grad'] = torch.zeros_like(parameter.data)
-                    state['prev_error'] = torch.zeros_like(parameter.data)
+                    state['prev_error'] = grad.abs().clone()
                     state['prev_update'] = torch.zeros_like(parameter.data)
 
                 step_size = state['step_size']
