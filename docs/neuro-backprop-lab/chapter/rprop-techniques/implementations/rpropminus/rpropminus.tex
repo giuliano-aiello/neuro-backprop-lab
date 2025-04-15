@@ -1,5 +1,6 @@
 \begin{subsection}{Rprop without Weight-Backtracking}
     \par This~\glsxtrshort{rprop} version, also said~\glsxtrshort{rprop}\textsuperscript{-}, updates the step size direction with the gradient sign only.
+    \par Even though the gradient-product case resulting in zero is a no-op, it is kept for readability and consistency with other algorithms.
     \input{chapter/rprop-techniques/implementations/rpropminus/pseudocode/rpropminus}
     \clearpage
 \end{subsection}

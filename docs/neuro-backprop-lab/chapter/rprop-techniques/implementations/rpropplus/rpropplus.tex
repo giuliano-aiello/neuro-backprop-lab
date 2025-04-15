@@ -1,3 +1,5 @@
-\begin{subsection}{Rprop+}
-    \par This is Rprop+.
+\begin{subsection}{Rprop with Weight-Backtracking}
+    \par This~\glsxtrshort{rprop} version, also said~\glsxtrshort{rprop}\textsuperscript{+}, updates the step size direction with the gradient sign when the gradient product is greater than or equal to zero. In the other case the algorithm performs a weight-backtracking, formally $\Delta w_{ij}^{curr} = -\Delta w_{ij}^{prev}$, then the current gradient is set to zero in order to activate the gradient-product case resulting in zero in the next iteration.
+    \input{chapter/rprop-techniques/implementations/rpropplus/pseudocode/rpropplus}
+    \clearpage
 \end{subsection}

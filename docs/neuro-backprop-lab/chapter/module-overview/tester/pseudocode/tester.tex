@@ -12,7 +12,7 @@
 
     \SetKwFunction{test}{$test$}
     \SetKwProg{Fn}{Function}{:}{\KwRet}
-    \Fn{\test{$model$, $criterion$, $batch$}}{
+    \Fn{\test{$model$, $criterion$, $test\_set$}}{
         \ForEach{$batch \in test\_set$}{
             $labels, loss, outputs \gets eval(model, criterion, batch)$\\
             $total\_correct, total\_loss, total\_samples \gets gather\_metrics(labels, loss, outputs)$
