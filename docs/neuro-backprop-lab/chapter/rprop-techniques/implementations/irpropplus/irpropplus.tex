@@ -1,3 +1,6 @@
 \begin{subsection}{Improved Rprop with Weight-Backtracking}
-    \par This is IRprop+.
+    \par This~\glsxtrshort{rprop} version, also said~\glsxtrshort{irprop}\textsuperscript{+}, extends the one described in subsection~\ref{subsec:rpropplus}.
+    \par The only modification concerns the gradient-product case resulting in less than zero: weight-backtracking is adopted only if the current error is greater than the previous error (this is what is meant by `improved'), otherwise the step size direction is set to zero.
+    \input{chapter/rprop-techniques/implementations/irpropplus/pseudocode/irpropplus}
+    \clearpage
 \end{subsection}
