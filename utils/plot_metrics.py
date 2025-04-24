@@ -12,7 +12,7 @@ def loss(losses, stage):
     plt.plot(losses)
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
-    plt.title(f'{stage.capitalize()} Loss')
+    plt.title(f'{stage.capitalize()}')
     plt.tight_layout()
     plt.show()
 
@@ -20,6 +20,6 @@ def accuracy(accuracies, stage):
     plt.plot(accuracies)
     plt.xlabel('Epochs')
     plt.ylabel('Accuracy')
-    plt.title(f'{stage.capitalize()} Accuracy')
+    plt.title(f'{stage.capitalize()}')
     plt.tight_layout()
     plt.show()
