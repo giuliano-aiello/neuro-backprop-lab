@@ -30,5 +30,8 @@
             \label{fig:evaluation_loss}
         \end{subfigure}
     \end{figure}
-    \par It can be instantly observed that the three different customized versions of~\glsxtrshort{rprop} exhibit the same trend during the training phase.
+    \par It can be instantly observed that the three different customized versions of~\glsxtrshort{rprop} exhibit the same loss trend during the training phase: during the initial epochs, a steep decrease in loss is followed by a gradual decrease that persists until the final epoch.\\
+    \glsxtrshort{rprop}\textsuperscript{+} by PyTorch case stands out: up to approximately the 26th epoch, the loss follows the pattern of the other~\glsxtrshort{rprop} versions, while also achieving the lowest loss. But onwards, it deviates from the general pattern with a significant loss increase. In this case, an early stopping criterion could be useful, as a considerably lower number of epochs is required for this~\glsxtrshort{rprop} implementation compared to the others.
+    Without any surprises, it is concluded that the PyTorch version of~\glsxtrshort{rprop}\textsuperscript{+} slightly distinguishes itself from the other versions.\\
+    \par Almost the same applies during the evaluation phase. However, a slight but greater discrepancy can be observed between the three customized versions from the point at which the gradual decrease begins. Whereas the~\glsxtrshort{rprop}\textsuperscript{+} PyTorch version shows a greater error increase from the second half of the epochs onwards, compared to the training phase.
 \end{section}
