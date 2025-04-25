@@ -1,0 +1,18 @@
+\begin{subsection}{Accuracy}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includesvg[inkscapelatex=true,width=\textwidth]{training_accuracy.svg}
+            \label{fig:training_accuracy}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includesvg[inkscapelatex=true,width=\textwidth]{evaluation_accuracy.svg}
+            \label{fig:evaluation_accuracy}
+        \end{subfigure}
+    \end{figure}
+    \par In the training phase, the customized~\glsxtrshort{rprop} versions follow the same trend, with~\glsxtrshort{rprop}\textsuperscript{-} having the worst performance. Once again,~\glsxtrshort{rprop}\textsuperscript{+} by PyTorch achieves the best performance.\\
+    \par In the evaluation phase, oscillations are more evident for each of the~\glsxtrshort{rprop} versions compared to the training phase. The performance of each~\glsxtrshort{rprop} version mirrors the trend observed during training:~\glsxtrshort{rprop}\textsuperscript{-} shows the worst performance, while the PyTorch implementation of~\glsxtrshort{rprop}\textsuperscript{+} reaches the peak, this time with ane even larger margin.
+\end{subsection}
