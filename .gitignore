@@ -25,3 +25,4 @@ docs/**/*.log
 docs/**/*.run.xml
 docs/**/*.synctex.gz
 docs/**/*.toc
+docs/**/svg-inkscape/
