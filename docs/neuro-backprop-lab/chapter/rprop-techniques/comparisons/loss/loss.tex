@@ -1,0 +1,22 @@
+\begin{subsection}{Loss}
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includesvg[inkscapelatex=true,width=\textwidth]{training_loss.svg}
+            \label{fig:training_loss}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.48\textwidth}
+            \centering
+            \includesvg[inkscapelatex=true,width=\textwidth]{evaluation_loss.svg}
+            \label{fig:evaluation_loss}
+        \end{subfigure}
+    \end{figure}
+    \par It can be instantly observed that the three different customized versions of~\glsxtrshort{rprop} exhibit the same loss trend during the training phase: during the initial epochs, a steep decrease in loss is followed by a gradual decrease that persists until the final epoch.\\
+    \glsxtrshort{rprop}\textsuperscript{+} by PyTorch case stands out: up to approximately the 26th epoch, the loss follows the pattern of the other~\glsxtrshort{rprop} versions, while also achieving the lowest loss. But onwards, it deviates from the general pattern with a significant loss increase. In this case, an early stopping criterion could be useful, as a considerably lower number of epochs is required for this~\glsxtrshort{rprop} implementation compared to the others.
+    Without any surprises, it is concluded that the PyTorch version of~\glsxtrshort{rprop}\textsuperscript{+} slightly distinguishes itself from the other versions.\\
+    \par Almost the same applies during the evaluation phase. However, a slight but greater discrepancy can be observed between the three customized versions from the point at which the gradual decrease begins. An important remark is made on the~\glsxtrshort{irprop}\textsuperscript{+} implementation that achieves the lowest error among the three customized versions. Whereas the~\glsxtrshort{rprop}\textsuperscript{+} PyTorch version shows a greater error increase from the second half of the epochs onwards, compared to the training phase.\\
+    \par If the behavior of a fixed~\glsxtrshort{rprop} version is observed in training and evaluation phase, focusing on the saved model based on the lowest evaluation error (sec.~\ref{sec:trainer}), what turns out is that the loss differs of at most an order of magnitude. This is clearly a warning of overfitting that could be worth monitoring.
+\end{subsection}
+\clearpage
