@@ -6,6 +6,14 @@
         \item the hidden layer receives the transformed vector and processes it into a $128$-sized vector with a \glsxtrshort{relu} activation function to introduce non-linearity;
         \item the output layer extracts the final predictions by transforming the $128$-sized vector into a $10$-sized vector, which corresponds to the number of possible classes for classification.
     \end{enumerate}
-    %model drawing
+    \vspace{1cm}
+    \begin{figure}[h]
+        \centering
+        \includesvg[inkscapelatex=false,width=200pt]{model.svg}
+        \caption[A schematic representation of the model.]{\emph{A schematic representation of the model}\footnotemark}
+        \label{fig:model}
+    \end{figure}
+
+    \footnotetext{Representation generated using NN-SVG, a public tool available on GitHub (\textit{https://github.com/alexlenail/NN-SVG})}
 \end{section}
 \clearpage
