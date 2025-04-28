@@ -1,6 +1,6 @@
 \begin{section}{Model}
     \par This class, \texttt{model.py}, represents the artificial neural network model architecture to be trained and tested. What follows are empirical choices that are the result of various experiments.\\
-    \par The model is a shallow network based on \texttt{torch.nn.Module}\footnote{\textit{https://pytorch.org/docs/stable/generated/torch.nn.Module.html} (accessed 2025)} class. Its three layers are fully connected using \texttt{torch.nn.Linear(.)} and they feed forward as follows:
+    \par The model is a shallow~\glsxtrlong{mlp} based on \texttt{torch.nn.Module}\footnote{\textit{https://pytorch.org/docs/stable/generated/torch.nn.Module.html} (accessed 2025)} class. Its three layers are fully connected using \texttt{torch.nn.Linear(.)} and they feed forward as follows:
     \begin{enumerate}
         \item the first layer flattens the input~\glsxtrshort{mnist} image, by transforming it from a multidimensional vector to a $784$-sized (since a $28 \times 28$-sized image is manipulated) one-dimensional vector;
         \item the hidden layer receives the transformed vector and processes it into a $128$-sized vector with a \glsxtrshort{relu} activation function to introduce non-linearity;
