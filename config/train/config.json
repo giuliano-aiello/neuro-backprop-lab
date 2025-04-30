@@ -4,7 +4,7 @@
   "learning_rate": 0.001,
   "epochs": 50,
   "train_set_size": 50000,
-  "train_batch_size": 5000,
+  "train_batch_size": 50000,
   "eval_set_size": 10000,
-  "eval_batch_size": 250
+  "eval_batch_size": 10000
 }
