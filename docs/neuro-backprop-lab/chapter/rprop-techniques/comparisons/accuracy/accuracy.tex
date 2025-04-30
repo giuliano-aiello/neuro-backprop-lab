@@ -13,6 +13,7 @@
             \label{fig:evaluation_accuracy}
         \end{subfigure}
     \end{figure}
-    \par In the training phase, the customized~\glsxtrshort{rprop} versions follow the same trend, with~\glsxtrshort{rprop}\textsuperscript{-} having the worst performance. Once again,~\glsxtrshort{rprop}\textsuperscript{+} by PyTorch achieves the best performance.\\
-    \par In the evaluation phase, oscillations are more evident for each of the~\glsxtrshort{rprop} versions compared to the training phase. The performance of each~\glsxtrshort{rprop} version mirrors the trend observed during training:~\glsxtrshort{rprop}\textsuperscript{-} shows the worst performance, while the PyTorch implementation of~\glsxtrshort{rprop}\textsuperscript{+} reaches the peak, this time with ane even larger margin.
+    \par In the training phase, the first 10 epochs were very bumpy, then the curves start to smooth out till the end of the training, reaching stability.\\
+
+    \par In the evaluation phase, oscillations are more visible for each of the~\glsxtrshort{rprop} versions, compared to the training phase. The performance of each~\glsxtrshort{rprop} version mirrors the trend observed during training:~\glsxtrshort{rprop}\textsuperscript{+} shows the worst performance, while the~\glsxtrshort{rprop}\textsuperscript{-} implementation reaches the peak.
 \end{subsection}

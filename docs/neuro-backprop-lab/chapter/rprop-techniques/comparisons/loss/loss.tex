@@ -13,10 +13,12 @@
             \label{fig:evaluation_loss}
         \end{subfigure}
     \end{figure}
-    \par It can be instantly observed that the three different customized versions of~\glsxtrshort{rprop} exhibit the same loss trend in the training phase: during the initial epochs, a steep decrease in loss is followed by a gradual decrease that persists until the final epoch.\\
-    \glsxtrshort{rprop}\textsuperscript{+} by PyTorch case stands out: up to approximately the 26th epoch, the loss follows the pattern of the other~\glsxtrshort{rprop} versions, while also achieving the lowest loss. But onwards, it deviates from the general pattern with a significant loss increase. In this case, an early stopping criterion could be useful, as a considerably lower number of epochs is required for this~\glsxtrshort{rprop} implementation compared to the others.
-    Without any surprises, it is concluded that the PyTorch version of~\glsxtrshort{rprop}\textsuperscript{+} slightly distinguishes itself from the other versions.\\
-    \par Almost the same applies during the evaluation phase. However, a slight but greater discrepancy can be observed between the three customized versions from the point at which the gradual decrease begins. An important remark is made on the~\glsxtrshort{irprop}\textsuperscript{+} implementation that achieves the lowest error among the three customized versions. Whereas the~\glsxtrshort{rprop}\textsuperscript{+} PyTorch version shows a greater error increase from the second half of the epochs onwards, compared to the training phase.\\
-    \par If the behavior of a fixed~\glsxtrshort{rprop} version is observed in training and evaluation phase, focusing on the saved model based on the lowest evaluation error (sec.~\ref{sec:trainer}), what turns out is that the loss differs of at most an order of magnitude. This is clearly a warning of overfitting that could be worth monitoring.
+    \par It can be instantly observed that the different versions of~\glsxtrshort{rprop} exhibit the same loss trend in the training phase: during the initial epochs, a steep decrease in loss is followed by a gradual decrease that starts from about the tenth epoch and persists until the last epoch.\\
+
+    Across these experiments, there is not a single technique that clearly stands out, they almost seem to overlap, although it can be seen that~\glsxtrshort{rprop}\textsuperscript{+} slightly exhibits a worse loss.\\
+    \par Almost the same applies during the evaluation phase. However, a slight but greater discrepancy can be observed between each of the~\glsxtrshort{rprop} versions from the point at which the gradual decrease begins.\\ The~\glsxtrshort{rprop}\textsuperscript{-} implementation seems to achieve the lowest error among all. Whereas, again, the~\glsxtrshort{rprop}\textsuperscript{+} version exhibits the greatest error from the start of the gradual decrease onwards.
+    \par The evidence suggests that an early stopping criterion would not have been beneficial, as the evaluation loss does not exhibit any increasing curve from a certain point onwards. Even though it seems that the evaluation loss would have stopped improving from the $50$\textsuperscript{th} epoch onwards.\\
+
+    \par An important remark is made on the difference in loss between training and evaluation phases: they differ by approximately an order of magnitude, this could be a warning of overfitting that could be worth monitoring.
 \end{subsection}
 \clearpage
