@@ -4,19 +4,35 @@
     \[
         \sum_{n=1}^{N} - \sum_{k=1}^{c} t_{k}^{n} \ln y_{k}^{n}
     \]
-    \par A total of $60,000$ elements was instantiated for the dataset, with $50,000$ allocated for the training set and $10,000$ for the evaluation set, using batch sizes of $5,000$ and $250$, respectively.\\
-    The learning rate is set as $1\mathrm{e}{-3}$, $\eta^{-}$ and $\eta^{+}$ are $0.5$ and $1.2$, $\Delta_{\min}$ and $\Delta_{\max}$ are $1\mathrm{e}{-6}$ and $50$, the procedure was performed over $50$ epochs. A coherent configuration file varying on a specific~\glsxtrshort{rprop} version is:\\
+    \par A total of $60,000$ elements was instantiated for the dataset, with $50,000$ allocated for the training set and $10,000$ for the evaluation set, using batch sizes of $50,000$ and $10,000$, respectively.\\
+    The learning rate $\eta$ is set as $1\mathrm{e}{-3}$, $\eta^{-}$ and $\eta^{+}$ are $0.5$ and $1.2$, $\Delta_{\min}$ and $\Delta_{\max}$ are $1\mathrm{e}{-6}$ and $50$, the procedure was performed over $50$ epochs. A coherent configuration file varying on a specific~\glsxtrshort{rprop} version is:\\
     \begin{verbatim}
                         "criterion": "cross_entropy",
                         "optimizer": <rproptechnique>,
                         "learning_rate": 0.001,
                         "epochs": 50,
                         "train_set_size": 50000,
-                        "train_batch_size": 5000,
+                        "train_batch_size": 50000,
                         "eval_set_size": 10000,
-                        "eval_batch_size": 250
+                        "eval_batch_size": 10000
     \end{verbatim}
     \clearpage
     \input{chapter/rprop-techniques/comparisons/loss/loss}
     \input{chapter/rprop-techniques/comparisons/accuracy/accuracy}
+    \clearpage
+    \begin{table}[htp]
+        \centering
+        \begin{tabular}{|p{4.3cm}|p{4.3cm}|p{4.3cm}|}
+            \hline
+            \multicolumn{1}{|c|}{\textbf{Rprop Technique}} & \multicolumn{1}{c|}{\textbf{Evaluation Accuracy}} & \multicolumn{1}{c|}{\textbf{Test Accuracy}} \\ \hline
+            \hspace{1.5cm} Rprop-                  & \hspace{1.5cm} 0.95800 \hfill               & \hspace{1.5cm} 0.95600 \hfill                    \\
+            \hspace{1.5cm} Rprop+                   & \hspace{1.5cm} 0.94270 \hfill               & \hspace{1.5cm} 0.94780 \hfill                    \\
+            \hspace{1.5cm}IRprop+ \hfill                 & \hspace{1.5cm} 0.95540 \hfill               & \hspace{1.5cm} 0.95570 \hfill                   \\
+            \hspace{0.8cm}Rprop+ PyTorch \hfill          & \hspace{1.5cm} 0.95500 \hfill               & \hspace{1.5cm} 0.95550 \hfill              \\
+            \hline
+        \end{tabular}
+        \caption{\emph{Test and evaluation performance metrics for Rprop implementations}}
+        \label{tab:test}
+    \end{table}
+    \par As highlighted in the table~\ref{tab:test}, the testing phase remained true to the evaluation phase, this emphasizes a good generalization by the model.
 \end{section}
