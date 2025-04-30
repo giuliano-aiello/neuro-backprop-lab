@@ -1,5 +1,5 @@
 {
   "criterion": "cross_entropy",
   "test_set_size": 10000,
-  "test_batch_size": 250
+  "test_batch_size": 10000
 }
