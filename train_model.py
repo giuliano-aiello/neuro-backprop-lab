@@ -1,10 +1,12 @@
+import numpy as np
+
 from utils.config_loader import load_config_training
 from utils.plot_metrics import plot_metrics
-from model.model_mnist import ModelMNIST
+from model.model import Model
 from trainer.trainer import Trainer
 
 
-model = ModelMNIST()
+model = Model()
 
 criterion, optimizer, epochs, loader_train_set, loader_eval_set = \
     load_config_training(model)
