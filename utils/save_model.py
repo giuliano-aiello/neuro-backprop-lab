@@ -22,5 +22,5 @@ def save_model(model, optimizer, n_epoch, eval_loss):
 
     delete_existing_model('./tester', '.pt')
 
-    filename = f"{get_optimizer_name(optimizer.__class__.__name__)}_epoch{n_epoch + 1}_eval-loss{eval_loss:.5f}.pt"
+    filename = f"{get_optimizer_name(optimizer.__class__.__name__)}_epoch{n_epoch + 1}_eval-loss{eval_loss:.7f}.pt"
     torch.save(model_data, os.path.join('./tester', filename))
