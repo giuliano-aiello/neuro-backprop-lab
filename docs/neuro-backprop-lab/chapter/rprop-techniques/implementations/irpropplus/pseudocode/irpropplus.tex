@@ -2,7 +2,7 @@
     \BlankLine
     \BlankLine
 
-    \For{$parameter \in parameters$} { \BlankLine
+    \For{$w_{ij} \in parameters$} { \BlankLine
     \If{${\frac{\partial E}{\partial w_{ij}}}^{curr} \cdot {\frac{\partial E}{\partial w_{ij}}}^{prev} > 0$} { \BlankLine \BlankLine
         $\Delta_{ij}^{curr} = \min(\eta^{+} \cdot \Delta_{ij}^{prev}, \Delta_{\max})$ \BlankLine
         $\Delta w_{ij}^{curr} = -\operatorname{sign}(\frac{\partial E}{\partial w_{ij}}^{curr}) \cdot \Delta_{ij}^{curr}$
