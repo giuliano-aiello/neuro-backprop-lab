@@ -4,7 +4,7 @@
 
     % delta_ij   step size
     % delta w_ij step size direction
-    \For{$parameter \in parameters$} { \BlankLine
+    \For{$w_{ij} \in parameters$} { \BlankLine
         \If{${\frac{\partial E}{\partial w_{ij}}}^{curr} \cdot {\frac{\partial E}{\partial w_{ij}}}^{prev} > 0$} { \BlankLine
             $\Delta_{ij}^{curr} = \min(\eta^{+} \cdot \Delta_{ij}^{prev}, \Delta_{\max})$
         }
