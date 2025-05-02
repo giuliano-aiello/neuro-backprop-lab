@@ -29,6 +29,16 @@
         \KwRet $dataset\_test(batch\_size)$
     }
 
+    \BlankLine
+    \BlankLine
+    \BlankLine
+
+    \SetKwFunction{getmnistdataset}{$get\_MNIST\_dataset$}
+    \SetKwProg{Fn}{Function}{:}{\KwRet}
+    \Fn{\getmnistdataset{learn\_mode}}{
+        \KwRet $MNISTdataset.normalize(learn\_mode, mean=0.5, standard\_deviation=0.5)$
+    }
+
     \caption{\texttt{loader\_dataset.py}}
     \label{alg:loader_dataset}
 \end{algorithm}
