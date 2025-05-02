@@ -14,15 +14,15 @@
     \SetKwProg{Fn}{Function}{:}{\KwRet}
     \Fn{\test{$model$, $criterion$, $test\_set$}}{
         \ForEach{$batch \in test\_set$}{
-            $labels, loss, outputs \gets eval(model, criterion, batch)$\\
+            $labels, loss, outputs \gets evalstep(model, criterion, batch)$\\
             $total\_correct, total\_loss, total\_samples \gets gather\_metrics(labels, loss, outputs)$
         }
         $loss\_average, accuracy \gets compute\_metrics(total\_correct, total\_loss, total\_samples)$
     }
 
-    \SetKwFunction{eval}{$eval$}
+    \SetKwFunction{evalstep}{$evalstep$}
     \SetKwProg{Fn}{Function}{:}{\KwRet}
-    \Fn{\eval{$model$, $criterion$, $batch$}}{
+    \Fn{\evalstep{$model$, $criterion$, $batch$}}{
         $inputs$, $labels \gets batch$\\
         $outputs \gets model(inputs)$\\
         $loss \gets criterion(outputs, labels)$ \BlankLine
