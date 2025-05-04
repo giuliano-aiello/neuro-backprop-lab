@@ -4,7 +4,7 @@
     \par Each~\glsxtrshort{rprop} algorithm that will be described corresponds to a specialized\\\texttt{torch.optim.Optimizer.step()}\footnote{\textit{https://pytorch.org/docs/main/optim.html} (accessed 2025)} class method.\\
     \par An~\glsxtrshort{rprop} algorithm is intended to perform the following steps:
     \begin{enumerate}
-        \item Compute the gradient of the error function with respect to the model weights.
+        \item Backpropagation of the error function with respect to the model weights.
         \begin{item}
             Update the step size based on a conditional logic of the current and previous gradient sign:
             \[
